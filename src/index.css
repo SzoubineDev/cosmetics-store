@@ -1,12 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap');
 @import "tailwindcss";
 
-/* --------------------------------------------------
-   Tailwind v4 theme customization.
-   Anything defined in @theme becomes a Tailwind utility.
-   Example: --font-display → class "font-display"
-            --color-brand-600 → class "bg-brand-600", "text-brand-600", etc.
--------------------------------------------------- */
 @theme {
   --font-sans: "Inter", system-ui, -apple-system, sans-serif;
   --font-display: "Playfair Display", Georgia, serif;
@@ -23,17 +17,32 @@
   --color-brand-900: #831843;
 }
 
-/* Global base styles */
 @layer base {
   html {
     scroll-behavior: smooth;
+    /* Prevent iOS from auto-zooming on input focus */
+    -webkit-text-size-adjust: 100%;
   }
 
   body {
     @apply bg-white text-neutral-800 font-sans antialiased;
+    /* iOS safe areas — avoids content going under notch / home indicator */
+    padding-left: env(safe-area-inset-left);
+    padding-right: env(safe-area-inset-right);
   }
 
   h1, h2, h3, h4 {
     @apply font-display tracking-tight;
+  }
+
+  /* Better tap targets on iOS without visual change */
+  button, a {
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  /* Prevent images from overflowing their container */
+  img {
+    max-width: 100%;
+    height: auto;
   }
 }

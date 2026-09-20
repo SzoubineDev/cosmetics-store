@@ -1,13 +1,23 @@
+import { useState } from 'react'
 import { Outlet } from 'react-router-dom'
 import Navbar from '../components/layout/Navbar'
+import CartDrawer from '../components/cart/CartDrawer'
+import { useCart } from '../hooks/useCart'
 
 function MainLayout() {
+  const cart = useCart()
+  const [isCartOpen, setIsCartOpen] = useState(false)
+
   return (
     <div className="min-h-screen flex flex-col bg-white">
-      <Navbar cartCount={0} />
+      <Navbar
+        cartCount={cart.totalItems}
+        onCartClick={() => setIsCartOpen(true)}
+      />
 
       <main className="flex-1">
-        <Outlet />
+        {/* The context prop gives every page access to the cart. */}
+        <Outlet context={{ cart }} />
       </main>
 
       <footer className="border-t border-neutral-200 bg-neutral-50">
@@ -15,6 +25,12 @@ function MainLayout() {
           © {new Date().getFullYear()} Belle Cosmetics — Casablanca
         </div>
       </footer>
+
+      <CartDrawer
+        isOpen={isCartOpen}
+        onClose={() => setIsCartOpen(false)}
+        cart={cart}
+      />
     </div>
   )
 }
