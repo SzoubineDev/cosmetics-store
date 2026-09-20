@@ -64,7 +64,7 @@ function Navbar({ cartCount = 0, onCartClick }) {
           {/* Logo */}
           <Link to="/" className="flex items-baseline gap-2 shrink-0">
             <span className="font-display text-xl sm:text-2xl text-brand-700 leading-none">
-              Belle
+              Cosmiyas Store
             </span>
             <span className="hidden sm:inline text-[10px] uppercase tracking-[0.25em] text-neutral-400">
               Cosmetics
